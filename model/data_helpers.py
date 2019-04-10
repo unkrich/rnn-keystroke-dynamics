@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-from model.keycodes import keycode_obj
+from keycodes import keycode_obj
 
 def read_from_file_to_arr(file_name):
   data = open(file_name, 'r').read()
@@ -52,4 +52,36 @@ def calc_between_ks_timings(ks_init_seek, ks_init_press, ks_next_seek, ks_next_p
   du = ks_next_seek + ks_next_press
 
   return dd, ud, uu, du
+
+def generate_digraph_vectors(data):
+  digraph_data = []
+
+  num_keystrokes = len(data) - 1
+  for i in range(num_keystrokes):
+    ks_init = data[i]
+    ks_init_seek, ks_init_press = ks_seek_press(ks_init)
+
+    ks_next = data[i+1]
+    ks_next_seek, ks_next_press = ks_seek_press(ks_next)
+
+    dd, ud, uu, du = calc_between_ks_timings(ks_init_seek, ks_init_press, ks_next_seek, ks_next_press)
+    digraph_data.append([dd, ud, uu, du])
+
+  return digraph_data
+
+def reshape(data):
+  np_data = np.array(data)
+  return np.reshape(np_data, (np_data.shape[0], 1, np_data.shape[1]))
+
+def clean_data(encodings, digraph_vectors):
+  clean_encodings = []
+  clean_digraph_vectors = []
+
+  for i in range(len(digraph_vectors)):
+    if digraph_vectors[i][0] < 1000: # seek time
+      clean_encodings.append(encodings[i])
+      clean_digraph_vectors.append(digraph_vectors[i])
+
+  return clean_encodings, clean_digraph_vectors
+
 

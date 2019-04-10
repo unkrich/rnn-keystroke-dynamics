@@ -80,6 +80,7 @@ class DataHelperTestSuite(unittest.TestCase):
 
     # def test_generate_digraph_vectors(self):
 
+    # def test_clean_data(self):
 
 
 if __name__ == '__main__':
