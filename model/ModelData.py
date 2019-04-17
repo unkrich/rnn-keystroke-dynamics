@@ -1,4 +1,6 @@
-from data_helpers import *
+# -*- coding: utf-8 -*-
+
+from helpers.data_helpers import *
 import numpy as np
 
 class ModelData(object):

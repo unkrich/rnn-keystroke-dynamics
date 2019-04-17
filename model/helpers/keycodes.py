@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 keycode_obj = {
     65: {'char': 'a', 'arr_val': 0},
     66: {'char': 'b', 'arr_val': 1},

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+
 import numpy as np
-from keycodes import keycode_obj
+from helpers.keycodes import keycode_obj
 
 def read_from_file_to_arr(file_name):
   data = open(file_name, 'r').read()
@@ -21,8 +22,10 @@ def generate_encodings(data):
     
     if keystroke_keycode in keycode_obj:
       index_val = keycode_obj[keystroke_keycode]['arr_val']
-      one_hot_encoding[index_val] = 1
-      all_one_hot_encodings.append(one_hot_encoding)
+
+    # TODO - fix data corruption point here
+    one_hot_encoding[index_val] = 1
+    all_one_hot_encodings.append(one_hot_encoding)
     # else:
       # throw away - note: THIS CORRUPTS DATA
 
@@ -69,10 +72,6 @@ def generate_digraph_vectors(data):
 
   return digraph_data
 
-def reshape(data):
-  np_data = np.array(data)
-  return np.reshape(np_data, (np_data.shape[0], 1, np_data.shape[1]))
-
 def clean_data(encodings, digraph_vectors):
   clean_encodings = []
   clean_digraph_vectors = []
@@ -83,5 +82,10 @@ def clean_data(encodings, digraph_vectors):
       clean_digraph_vectors.append(digraph_vectors[i])
 
   return clean_encodings, clean_digraph_vectors
+
+def reshape(data):
+  np_data = np.array(data)
+  return np.reshape(np_data, (np_data.shape[0], 1, np_data.shape[1]))
+
 
 
