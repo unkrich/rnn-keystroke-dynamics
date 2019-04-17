@@ -76,11 +76,14 @@ class DataHelperTestSuite(unittest.TestCase):
         self.assertEqual(expected_seek, 251)
         self.assertEqual(expected_press, 88)
 
-    # def test_calc_between_ks_timings(self):
+    def test_calc_between_ks_timings(self):
+        assert False
 
-    # def test_generate_digraph_vectors(self):
+    def test_generate_digraph_vectors(self):
+        assert False
 
-    # def test_clean_data(self):
+    def test_clean_data(self):
+        assert False
 
 
 if __name__ == '__main__':
